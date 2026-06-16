@@ -1,0 +1,29 @@
+# Maven build output
+backend/target/
+backend/*.jar
+backend/*.war
+backend/*.zip
+backend/*.tar.gz
+
+# IDE and Project Settings
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS and System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+.directory
+
+# Local crash logs or temporary files
+*.log

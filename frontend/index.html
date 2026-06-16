@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DryRun // Gamified DSA Logic Studio</title>
+    <meta name="description" content="DryRun - A gamified platform for learning Data Structures and Algorithms through interactive visual debugging and code duels.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="layout-desktop" data-theme-active="cyberpunk">
+
+    <!-- ====== HERO LANDING SECTION ====== -->
+    <section class="hero-landing" id="hero-section">
+        <div class="hero-bg-grid"></div>
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+        <div class="hero-glow hero-glow-3"></div>
+        
+        <nav class="hero-nav">
+            <div class="hero-logo">
+                <span class="logo-bracket">&lt;</span>
+                <span class="logo-text">DryRun</span>
+                <span class="logo-bracket">/&gt;</span>
+            </div>
+            <div class="hero-nav-links">
+                <a href="#features-section" class="nav-link">Features</a>
+                <a href="#studio-section" class="nav-link">Studio</a>
+                <a href="#stats-section" class="nav-link">Stats</a>
+                <button class="hero-cta-small" id="hero-start-btn">Launch Studio →</button>
+            </div>
+        </nav>
+
+        <div class="hero-content">
+            <div class="hero-badge">⚡ DSA Logic Builder for Developers</div>
+            <h1 class="hero-title">
+                Learn DSA by
+                <span class="gradient-text">Debugging</span>,
+                not Memorizing.
+            </h1>
+            <p class="hero-subtitle">
+                Visual pointer tracing, step-by-step algorithm deconstruction, and competitive code duels. 
+                Powered by a Java Spring Boot backend with real-time database integration.
+            </p>
+            <div class="hero-actions">
+                <button class="hero-cta-primary" id="hero-launch-btn">
+                    <span>🚀</span> Enter the Studio
+                </button>
+                <button class="hero-cta-secondary" id="hero-demo-btn">
+                    <span>▶</span> Watch Demo
+                </button>
+            </div>
+            <div class="hero-tech-stack">
+                <span class="tech-pill">Java 21</span>
+                <span class="tech-pill">Spring Boot</span>
+                <span class="tech-pill">JPA + Hibernate</span>
+                <span class="tech-pill">H2 Database</span>
+                <span class="tech-pill">REST API</span>
+                <span class="tech-pill">ES6 + CSS3</span>
+            </div>
+        </div>
+
+        <div class="hero-scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow">↓</div>
+        </div>
+    </section>
+
+    <!-- ====== FEATURES SECTION ====== -->
+    <section class="features-section" id="features-section">
+        <div class="section-header">
+            <span class="section-tag">CORE FEATURES</span>
+            <h2>Built for Real Engineers</h2>
+            <p>Not just another tutorial app — DryRun teaches you HOW to think about algorithms.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🗺️</div>
+                <h3>Learning Roadmap</h3>
+                <p>Gamified skill tree with nodes for Arrays, Two-Pointers, Sliding Window, Binary Search and more. Unlock as you progress.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>Visual Logic Lessons</h3>
+                <p>Deconstruct LeetCode problems step-by-step. Move pointers on interactive grid visualizers instead of writing code.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚔️</div>
+                <h3>Code Duel Arena</h3>
+                <p>Rapid-fire debugging challenges. Find the correct loop condition before the timer runs out. Compete against AI opponents.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔥</div>
+                <h3>Streak & XP System</h3>
+                <p>Track daily streaks, earn XP, manage lives. All persisted in a real Spring Boot + H2 database backend.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💾</div>
+                <h3>Full-Stack REST API</h3>
+                <p>Every interaction saves to a database. GET stats, POST answers, validate logic — all through documented REST endpoints.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>3 Color Themes</h3>
+                <p>Switch between Cyberpunk, Emerald, and Fusion themes. All with neon glows, glassmorphism, and smooth micro-animations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== INTERACTIVE STUDIO SECTION ====== -->
+    <section class="studio-section" id="studio-section">
+        <!-- Top Studio Navigation Header -->
+        <header class="web-top-bar">
+            <div class="web-logo-container">
+                <span class="logo-bracket">&lt;</span>
+                <span class="logo-text">DryRun</span>
+                <span class="logo-bracket">/&gt;</span>
+                <span class="web-tagline">DSA LOGIC STUDIO</span>
+            </div>
+            
+            <div class="backend-status-indicator">
+                <span class="status-pulse-dot" id="api-status-dot"></span>
+                <span id="api-status-text">CONNECTING API...</span>
+            </div>
+
+            <div class="web-header-actions">
+                <button id="view-mode-toggle" class="mode-toggle-btn">
+                    <span class="toggle-icon">📱</span>
+                    <span class="toggle-text">Switch to Mobile Simulator</span>
+                </button>
+                
+                <div class="theme-selectors-header">
+                    <button class="theme-btn active" data-theme="cyberpunk" style="background: linear-gradient(135deg, #00ff66, #ab20fd);"></button>
+                    <button class="theme-btn" data-theme="emerald" style="background: linear-gradient(135deg, #05e3a6, #00a8ff);"></button>
+                    <button class="theme-btn" data-theme="fusion" style="background: linear-gradient(135deg, #ff6a00, #ff0055);"></button>
+                </div>
+                
+                <button id="reset-db-btn" class="reset-db-header-btn">RESET PROGRESS</button>
+                <a href="#hero-section" class="back-to-top-link">↑ Top</a>
+            </div>
+        </header>
+
+        <!-- Main Workspace Container -->
+        <div id="desktop-container">
+            <div class="glow-orb glow-purple"></div>
+            <div class="glow-orb glow-green"></div>
+            <div class="glow-orb glow-orange"></div>
+            
+            <!-- Left Sidebar -->
+            <aside class="sidebar" id="dashboard-sidebar">
+                <div class="sidebar-section-title">DSA STUDIO COMPANION</div>
+                <div class="welcome-box">
+                    <h4>Welcome, Developer! ⚡</h4>
+                    <p>This workspace connects a Spring Boot API with your interactive frontend. Switch layouts to test responsiveness.</p>
+                </div>
+
+                <div class="panel-section">
+                    <h3>INTERACTIVE TASKS</h3>
+                    <ul class="spec-list">
+                        <li><span class="bullet green"></span> <strong>Solve Lesson:</strong> Move pointers in the grid visualizer to optimize the water area.</li>
+                        <li><span class="bullet purple"></span> <strong>Debug Arena:</strong> Click the correct comparison loop in Code Duel.</li>
+                        <li><span class="bullet orange"></span> <strong>Check DB:</strong> Reset progress to re-seed starting states in H2.</li>
+                    </ul>
+                </div>
+
+                <div class="panel-section console-section">
+                    <div class="console-header">
+                        <span>API LOG CONSOLE</span>
+                        <span class="console-dot"></span>
+                    </div>
+                    <div class="console-body" id="console-logs">
+                        <div class="log-entry system"><span class="log-time">[--:--:--]</span> Client initialization pending...</div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Central Simulator -->
+            <main class="simulator-wrapper" id="main-workspace">
+                
+                <!-- Phone Frame (Mobile Mode Only) -->
+                <div class="phone-frame" id="phone-chassis">
+                    <div class="phone-notch">
+                        <div class="camera-lens"></div>
+                        <div class="speaker-grill"></div>
+                    </div>
+                    <div class="phone-screen-container" id="phone-screen-target">
+                        <div class="status-bar">
+                            <span class="status-time" id="screen-time">09:41</span>
+                            <div class="status-icons">
+                                <svg class="icon-svg" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                                    <rect x="2" y="16" width="3" height="5" rx="0.5" fill="currentColor"/>
+                                    <rect x="7" y="12" width="3" height="9" rx="0.5" fill="currentColor"/>
+                                    <rect x="12" y="8" width="3" height="13" rx="0.5" fill="currentColor"/>
+                                    <rect x="17" y="4" width="3" height="17" rx="0.5" fill="currentColor" opacity="0.4"/>
+                                </svg>
+                                <svg class="icon-svg" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                                    <path fill="currentColor" d="M12,21L15.6,16.2C14.6,15.4 13.3,15 12,15C10.7,15 9.4,15.4 8.4,16.2L12,21M12,3C6.5,3 2,6.5 2,11C2,12.7 2.7,14.3 3.9,15.6L5.3,13.8C4.5,13 4,12 4,11C4,7.7 7.6,5 12,5C16.4,5 20,7.7 20,11C20,12 19.5,13 18.7,13.8L20.1,15.6C21.3,14.3 22,12.7 22,11C22,6.5 17.5,3 12,3Z" />
+                                </svg>
+                                <div class="battery-icon">
+                                    <div class="battery-level"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UNIFIED APP VIEWPORT -->
+                <div id="unified-viewport" class="viewport-desktop">
+                    
+                    <!-- APP HEADER BAR -->
+                    <header class="app-header" id="shared-app-header">
+                        <div class="header-stat streak-stat" id="btn-streak-stat" title="Streak Days">
+                            <span class="stat-icon">🔥</span>
+                            <span id="stat-streak-val" class="stat-value">12</span>
+                        </div>
+                        <div class="header-stat xp-stat" id="btn-xp-stat" title="Experience Points">
+                            <span class="stat-icon-xp">XP</span>
+                            <span id="stat-xp-val" class="stat-value">350</span>
+                        </div>
+                        <div class="header-stat hearts-stat" id="btn-hearts-stat" title="Lives Remaining">
+                            <span class="stat-icon heart-animate">❤️</span>
+                            <span id="stat-hearts-val" class="stat-value">5</span>
+                        </div>
+                    </header>
+
+                    <!-- Screen Contents -->
+                    <div class="viewport-screens" id="screens-container">
+                        
+                        <!-- PANEL 1: ROADMAP -->
+                        <section class="app-screen active" id="screen-learning">
+                            <div class="screen-title-banner">
+                                <h2>Logic Road</h2>
+                                <p>Master arrays & pointers visually</p>
+                            </div>
+                            <div class="roadmap-scroll-container">
+                                <div class="roadmap-path-svg-container">
+                                    <div class="roadmap-line"></div>
+                                </div>
+                                <div class="roadmap-tree">
+                                    <div class="roadmap-node completed" data-topic="Arrays Basics" data-xp="50">
+                                        <div class="node-circle">
+                                            <span class="node-icon">[]</span>
+                                            <div class="node-pulse"></div>
+                                        </div>
+                                        <span class="node-label">Arrays Basics</span>
+                                    </div>
+                                    <div class="roadmap-node active" data-topic="Two-Pointers" data-xp="100">
+                                        <div class="node-circle glow-green-ring">
+                                            <span class="node-icon">⇄</span>
+                                            <div class="node-pulse active animate-pulse"></div>
+                                        </div>
+                                        <span class="node-label">Two-Pointers</span>
+                                        <span class="node-status-tag">ACTIVE</span>
+                                    </div>
+                                    <div class="roadmap-node locked" data-topic="Sliding Window" data-xp="150">
+                                        <div class="node-circle">
+                                            <span class="node-icon">🔒</span>
+                                        </div>
+                                        <span class="node-label">Sliding Window</span>
+                                    </div>
+                                    <div class="roadmap-node locked" data-topic="Binary Search" data-xp="200">
+                                        <div class="node-circle">
+                                            <span class="node-icon">🔒</span>
+                                        </div>
+                                        <span class="node-label">Binary Search</span>
+                                    </div>
+                                    <div class="roadmap-node locked" data-topic="Sorting & Partitioning" data-xp="250">
+                                        <div class="node-circle">
+                                            <span class="node-icon">🔒</span>
+                                        </div>
+                                        <span class="node-label">Quick Sort Logic</span>
+                                    </div>
+                                    <div class="roadmap-node locked boss-node" data-topic="Bit Manipulation" data-xp="500">
+                                        <div class="node-circle">
+                                            <span class="node-icon">💀</span>
+                                        </div>
+                                        <span class="node-label">Bitwise Boss Duel</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- PANEL 2: LESSON -->
+                        <section class="app-screen" id="screen-lesson">
+                            <div class="problem-card">
+                                <div class="problem-meta">
+                                    <span class="problem-difficulty medium">Medium</span>
+                                    <span class="problem-id">LeetCode 11</span>
+                                </div>
+                                <h3>Container With Most Water</h3>
+                                <p class="problem-explanation">
+                                    <strong>Goal:</strong> Find two vertical lines that together with the x-axis forms a container, such that the container contains the most water.
+                                </p>
+                            </div>
+                            <div class="pointer-dashboard">
+                                <div class="pointer-stat val-l">
+                                    <span class="lbl">L (Index <span id="index-l-val">0</span>)</span>
+                                    <span id="lesson-height-l" class="val">Height: 1</span>
+                                </div>
+                                <div class="pointer-stat area-stat">
+                                    <span class="lbl">Current Area</span>
+                                    <span id="lesson-current-area" class="val-highlight">8</span>
+                                </div>
+                                <div class="pointer-stat val-r">
+                                    <span class="lbl">R (Index <span id="index-r-val">8</span>)</span>
+                                    <span id="lesson-height-r" class="val">Height: 7</span>
+                                </div>
+                            </div>
+                            <div class="visualizer-container">
+                                <div class="water-layer" id="water-fill" style="height: 10%; bottom: 0; width: 100%;"></div>
+                                <div class="grid-bars" id="grid-bars-container"></div>
+                                <div class="pointer-indicators" id="pointer-row"></div>
+                            </div>
+                            <div class="lesson-challenge">
+                                <div class="question-header">
+                                    <span class="challenge-badge">MICRO-CHALLENGE</span>
+                                    <h4 id="lesson-question-text">To maximize water area, which pointer should move next?</h4>
+                                </div>
+                                <div class="options-container">
+                                    <button class="option-card" id="option-a" data-choice="A">
+                                        <div class="option-checkbox"></div>
+                                        <div class="option-content">
+                                            <span class="option-tag">A</span>
+                                            <span class="option-text" id="text-option-a">Move Right Pointer Leftwards (R--)</span>
+                                        </div>
+                                    </button>
+                                    <button class="option-card" id="option-b" data-choice="B">
+                                        <div class="option-checkbox"></div>
+                                        <div class="option-content">
+                                            <span class="option-tag">B</span>
+                                            <span class="option-text" id="text-option-b">Move Left Pointer Rightwards (L++)</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="lesson-action-drawer">
+                                <button class="action-btn check-btn" id="lesson-check-btn" disabled>CHECK ANSWER</button>
+                            </div>
+                        </section>
+
+                        <!-- PANEL 3: CODE DUEL -->
+                        <section class="app-screen" id="screen-duel">
+                            <div class="clash-card">
+                                <div class="clash-header">
+                                    <span class="clash-tag">ARENA</span>
+                                    <div class="timer-badge">
+                                        <span class="timer-icon">⏳</span>
+                                        <span id="duel-timer">00:45</span>
+                                    </div>
+                                </div>
+                                <div class="clash-opponents">
+                                    <div class="player-profile you">
+                                        <div class="avatar-glow border-green">
+                                            <span class="avatar-emoji">⚡</span>
+                                        </div>
+                                        <span class="profile-name">You</span>
+                                        <span class="profile-title">Two-Pointer Novice</span>
+                                    </div>
+                                    <div class="vs-divider">VS</div>
+                                    <div class="player-profile opponent">
+                                        <div class="avatar-glow border-purple">
+                                            <span class="avatar-emoji">🤖</span>
+                                        </div>
+                                        <span class="profile-name">AlphaCoder99</span>
+                                        <span class="profile-title">Binary Search Pro</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="duel-puzzle-container">
+                                <div class="puzzle-header">
+                                    <span class="puzzle-difficulty hard">BUG HUNT</span>
+                                    <h4>Find the correct loop condition for Binary Search:</h4>
+                                </div>
+                                <div class="code-editor-block">
+                                    <div class="editor-header">
+                                        <span class="file-name">binary_search.js</span>
+                                        <span class="lang-pill">Javascript</span>
+                                    </div>
+                                    <pre><code><span class="code-kw">function</span> <span class="code-fn">binarySearch</span>(arr, target) {
+    <span class="code-kw">let</span> left = <span class="code-num">0</span>;
+    <span class="code-kw">let</span> right = arr.length - <span class="code-num">1</span>;
+    
+    <span class="code-comment">// Which condition prevents infinite loops or skipping elements?</span>
+    <span class="code-kw">while</span> (<span class="code-error-highlight" id="duel-bug-highlight">/* ??? */</span>) {
+        <span class="code-kw">let</span> mid = Math.floor((left + right) / <span class="code-num">2</span>);
+        <span class="code-kw">if</span> (arr[mid] === target) <span class="code-kw">return</span> mid;
+        <span class="code-kw">else if</span> (arr[mid] &lt; target) left = mid + <span class="code-num">1</span>;
+        <span class="code-kw">else</span> right = mid - <span class="code-num">1</span>;
+    }
+    <span class="code-kw">return</span> -<span class="code-num">1</span>;
+}</code></pre>
+                                </div>
+                                <div class="duel-choices-container" id="duel-choices">
+                                    <button class="duel-choice-btn" data-answer="1">
+                                        <span class="choice-tag">1</span>
+                                        <code class="choice-code">left &lt; right</code>
+                                    </button>
+                                    <button class="duel-choice-btn" data-answer="2">
+                                        <span class="choice-tag">2</span>
+                                        <code class="choice-code">left &lt;= right</code>
+                                    </button>
+                                    <button class="duel-choice-btn" data-answer="3">
+                                        <span class="choice-tag">3</span>
+                                        <code class="choice-code">left != right</code>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="duel-score-status">
+                                <div class="score-labels">
+                                    <span>Your HP: <span id="player-hp-txt">100</span>%</span>
+                                    <span>AlphaCoder99 HP: <span id="opponent-hp-txt">100</span>%</span>
+                                </div>
+                                <div class="duel-hp-bars">
+                                    <div class="hp-track">
+                                        <div class="hp-fill player-hp" id="player-hp-bar" style="width: 100%;"></div>
+                                    </div>
+                                    <div class="hp-track">
+                                        <div class="hp-fill opponent-hp" id="opponent-hp-bar" style="width: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Mobile Nav Footer -->
+                    <nav class="app-navbar" id="shared-app-navbar">
+                        <button class="nav-tab active" data-target="screen-learning">
+                            <span class="tab-icon">🗺️</span>
+                            <span class="tab-label">Roadmap</span>
+                        </button>
+                        <button class="nav-tab" data-target="screen-lesson">
+                            <span class="tab-icon">🧠</span>
+                            <span class="tab-label">Lesson</span>
+                        </button>
+                        <button class="nav-tab" data-target="screen-duel">
+                            <span class="tab-icon">⚔️</span>
+                            <span class="tab-label">Code Duel</span>
+                        </button>
+                    </nav>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- ====== STATS / API SECTION ====== -->
+    <section class="stats-section" id="stats-section">
+        <div class="section-header">
+            <span class="section-tag">REST API</span>
+            <h2>Full-Stack Architecture</h2>
+            <p>Every interaction persists to a real Spring Boot + H2 database backend.</p>
+        </div>
+        <div class="api-cards-grid">
+            <div class="api-card">
+                <div class="api-method get">GET</div>
+                <code>/api/stats</code>
+                <p>Fetch user XP, streak, and hearts from the database.</p>
+            </div>
+            <div class="api-card">
+                <div class="api-method post">POST</div>
+                <code>/api/lesson/validate</code>
+                <p>Submit a step answer. Backend validates, updates XP/hearts, returns explanation.</p>
+            </div>
+            <div class="api-card">
+                <div class="api-method get">GET</div>
+                <code>/api/lesson/step/{n}</code>
+                <p>Retrieve pointer positions, question text, and options for lesson step N.</p>
+            </div>
+            <div class="api-card">
+                <div class="api-method post">POST</div>
+                <code>/api/reset</code>
+                <p>Reset all user progress to default values in the database.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-bracket">&lt;</span>
+                <span class="logo-text">DryRun</span>
+                <span class="logo-bracket">/&gt;</span>
+            </div>
+            <p>Built with Java Spring Boot, JPA, H2 & Vanilla JS. A full-stack portfolio project.</p>
+            <div class="footer-links">
+                <a href="#hero-section">Home</a>
+                <a href="#features-section">Features</a>
+                <a href="#studio-section">Studio</a>
+                <a href="#stats-section">API Docs</a>
+            </div>
+            <span class="footer-copy">© 2026 DryRun. Open Source Portfolio Project.</span>
+        </div>
+    </footer>
+
+    <!-- Overlays -->
+    <div id="toast-notification" class="toast hidden"></div>
+    <div id="lesson-feedback-overlay" class="feedback-overlay hidden">
+        <div class="feedback-content">
+            <div class="feedback-emoji" id="feedback-emoji">🎉</div>
+            <h3 id="feedback-title">Awesome!</h3>
+            <p id="feedback-desc">Correct logic. Moving pointers...</p>
+            <button class="action-btn next-step-btn" id="feedback-continue-btn">CONTINUE</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
