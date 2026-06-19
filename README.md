@@ -77,19 +77,3 @@ Follow these simple steps to run the full-stack app on your local machine:
 
 ---
 
-## 🛡️ SDE Portfolio Customization Tips (For Job Seekers)
-
-If you are a student or developer applying for software engineering internships or roles, here are modifications you can make to showcase deep engineering knowledge on your GitHub:
-
-1. **Switch H2 to PostgreSQL:**
-   To show production database expertise, run PostgreSQL locally (or via Docker) and swap the database connection details in `backend/src/main/resources/application.properties`:
-   ```properties
-   spring.datasource.url=jdbc:postgresql://localhost:5412/dryrundb
-   spring.datasource.username=your_postgres_user
-   spring.datasource.password=your_postgres_password
-   spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
-   ```
-2. **Add Spring Security JWT Login:**
-   Implement user registration and authentication controllers instead of hardcoding `Developer1` to showcase modern API security methods.
-3. **Integrate Real Code Compilation (Judge0):**
-   Connect a code compiler microservice (e.g., using Judge0 API) to compile and execute actual Java code submitted in Code Duels!
